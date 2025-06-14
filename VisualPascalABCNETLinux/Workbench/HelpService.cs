@@ -143,7 +143,7 @@ namespace VisualPascalABC
 
             if (tw != null)
             {
-                Position pos = default(Position);
+                Position pos = default(Position);                                                                                   
                 if (isDotNetItem(tw.Word, ref pos))
                 {
                     return true;
@@ -165,7 +165,8 @@ namespace VisualPascalABC
                 {
                     if (pos.full_metadata_title != null)
                     {
-                        AddTabWithUrl(MainDockPanel, pos.full_metadata_title, getMSDNUrlByName(tw.Word, pos));
+                        //AddTabWithUrl(MainDockPanel, pos.full_metadata_title, getMSDNUrlByName(tw.Word, pos));//keep to future enhance
+                        System.Diagnostics.Process.Start(getMSDNUrlByName(tw.Word, pos));
                     }
                 }
             }
