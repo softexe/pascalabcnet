@@ -69,6 +69,7 @@ namespace VisualPascalABC
             {
                 // If completion window is open and wants to handle the key, don't let the text area
                 // handle it
+                //Console.Write(key);
                 if (codeCompletionWindow.ProcessKeyEvent(key))
                     return true;
             }
@@ -104,6 +105,7 @@ namespace VisualPascalABC
                 if (WorkbenchServiceFactory.Workbench.UserOptions.CodeCompletionDot)
                 {
                     completionDataProvider = new CodeCompletionProvider();
+                    if (codeCompletionWindow != null) codeCompletionWindow.Close(); //close prev completion window
 
                     codeCompletionWindow = PABCNETCodeCompletionWindow.ShowCompletionWindow(
                         VisualPABCSingleton.MainForm,					// The parent window for the completion window
@@ -124,7 +126,11 @@ namespace VisualPascalABC
             }
             else if (key == '(' || key == '[' || key == ',')
             {
+                //return false;
                 if (CodeCompletion.CodeCompletionController.CurrentParser == null) return false;
+
+                if (codeCompletionWindow != null) codeCompletionWindow.Close(); //close prev completion window
+
                 if (VisualPABCSingleton.MainForm.UserOptions.CodeCompletionParams)
                 {
                     ICSharpCode.TextEditor.Gui.InsightWindow.IInsightDataProvider idp = new DefaultInsightDataProvider(-1, false, key);
@@ -150,6 +156,7 @@ namespace VisualPascalABC
                 if (CodeCompletion.CodeCompletionController.CurrentParser == null) return false;
                 if (VisualPABCSingleton.MainForm.UserOptions.CodeCompletionDot)
                 {
+                    if (codeCompletionWindow != null) codeCompletionWindow.Close(); //close prev completion windo
                     PascalABCCompiler.Parsers.KeywordKind keyw = KeywordChecker.TestForKeyword(editor.Document.TextContent, editor.ActiveTextAreaControl.TextArea.Caret.Offset - 1);
                     if (keyw == PascalABCCompiler.Parsers.KeywordKind.New || keyw == PascalABCCompiler.Parsers.KeywordKind.Uses)
                     {
@@ -164,6 +171,7 @@ namespace VisualPascalABC
                             false,
                             keyw
                         );
+                        editor.Focus();
                         CodeCompletionNamesOnlyInModuleAction.comp_windows[editor.ActiveTextAreaControl.TextArea] = codeCompletionWindow;
                         if (codeCompletionWindow != null)
                             codeCompletionWindow.Closed += new EventHandler(CloseCodeCompletionWindow);
@@ -203,6 +211,7 @@ namespace VisualPascalABC
                     if (editor.ActiveTextAreaControl.TextArea.Caret.Offset > 0 && (char.IsLetterOrDigit(editor.Document.TextContent[editor.ActiveTextAreaControl.TextArea.Caret.Offset - 1]) || editor.Document.TextContent[editor.ActiveTextAreaControl.TextArea.Caret.Offset - 1] == '_'))
                         return false;
                     
+                    if (codeCompletionWindow != null) codeCompletionWindow.Close(); //close prev completion windo
                     completionDataProvider = new CodeCompletionProvider();
                     codeCompletionWindow = PABCNETCodeCompletionWindow.ShowCompletionWindowWithFirstChar(
                         VisualPABCSingleton.MainForm,					// The parent window for the completion window
@@ -212,6 +221,7 @@ namespace VisualPascalABC
                         key,						// Key pressed - will be passed to the provider
                         keyw
                     );
+                    editor.Focus();
                     CodeCompletionNamesOnlyInModuleAction.comp_windows[editor.ActiveTextAreaControl.TextArea] = codeCompletionWindow;
                     if (codeCompletionWindow != null)
                         codeCompletionWindow.Closed += new EventHandler(CloseCodeCompletionWindow);

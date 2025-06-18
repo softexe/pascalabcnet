@@ -456,8 +456,8 @@ namespace VisualPascalABC
         			ExeFileName = null;
         			WorkbenchServiceFactory.OperationsService.ClearTabStack();
         			WorkbenchServiceFactory.DebuggerOperationsService.ClearDebugTabs();
-                    if (WorkbenchServiceFactory.Workbench.DisassemblyWindow != null)
-                        WorkbenchServiceFactory.Workbench.DisassemblyWindow.ClearWindow();
+                    //if (WorkbenchServiceFactory.Workbench.DisassemblyWindow != null)
+                    //    WorkbenchServiceFactory.Workbench.DisassemblyWindow.ClearWindow();
         		}
         	}
         }
@@ -840,7 +840,8 @@ namespace VisualPascalABC
             WorkbenchServiceFactory.DebuggerOperationsService.ClearLocalVarTree();
             WorkbenchServiceFactory.DebuggerOperationsService.ClearDebugTabs();
             WorkbenchServiceFactory.DebuggerOperationsService.ClearWatch();
-            WorkbenchServiceFactory.Workbench.DisassemblyWindow.ClearWindow();
+            if (WorkbenchServiceFactory.Workbench.DisassemblyWindow != null)
+                WorkbenchServiceFactory.Workbench.DisassemblyWindow.ClearWindow();
             workbench.WidgetController.SetDebugTabsVisible(false);
             WorkbenchServiceFactory.OperationsService.ClearTabStack();
             workbench.WidgetController.EnableCodeCompletionToolTips(true);
