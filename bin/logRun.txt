@@ -1,0 +1,4 @@
+The system cannot find the file specified
+   в System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   в VisualPascalABC.Utils.ProcessRunner.Start(String command, String arguments, Boolean redirectIO, Boolean redirectErrors, Boolean RunWithPause, Boolean attachDebugger, Boolean fictive_attach)
+   в VisualPascalABC.RunManager.Run(String fileName, String args, Boolean redirectIO, Boolean redirectErrors, Boolean RunWithPause, String WorkingDirectory, Boolean attachDebugger, Boolean fictive_attach)

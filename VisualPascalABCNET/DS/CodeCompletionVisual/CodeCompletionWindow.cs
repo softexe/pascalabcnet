@@ -212,12 +212,22 @@ namespace ICSharpCode.TextEditor.Gui.CompletionWindow
 		void CodeCompletionListViewSelectedItemChanged(object sender, EventArgs e)
 		{
 			ICompletionData data = codeCompletionListView.SelectedCompletionData;
-			if (data != null && !(data as UserDefaultCompletionData).IsOnOverrideWindow && data.Description != null && data.Description.Length > 0) {
-				
+			if (data != null && !(data as UserDefaultCompletionData).IsOnOverrideWindow && data.Description != null && data.Description.Length > 0)
+			{
+
 				declarationViewWindow.Description = data.Description;
 				SetDeclarationViewLocation();
-			} else {
+			}
+			else
+			{
 				declarationViewWindow.Description = null;
+			}
+			//added from linux versiob
+			if (data == null && Visible)
+			{
+				Close();
+				fiexerrorTextAreaInvalidate();
+				// editorControl.Focus();
 			}
 		}
 		
