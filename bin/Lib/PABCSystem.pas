@@ -9226,7 +9226,7 @@ begin
   var fi := new System.IO.FileInfo(fileName);
   Result := fi.DirectoryName;
   if (Result.Length > 0) and (Result[Result.Length] <> '\') and (Result[Result.Length] <> '/') then
-    Result += '\';
+    Result += System.IO.Path.DirectorySeparatorChar;
 end;
 
 function ExtractFileDir(fileName: string): string;
